@@ -148,7 +148,7 @@
                         <fieldset class="location">
                             <legend>行程地點<span>*</span></legend>
                             <label for="northern">北部</label>
-                            <input class="groupLocation" type="checkbox" id="northern" name="location[]" value="north">
+                            <input class="groupLocation" type="checkbox" id="northern" name="location[]" value="northern">
                             <label for="central">中部</label>
                             <input class="groupLocation" type="checkbox" id="central" name="location[]" value="central">
                             <label for="southern">南部</label>

@@ -15,7 +15,7 @@ $rowsJoin = $resultJoin->fetch_all(MYSQLI_ASSOC);
 // $rowsNum = $resultJoin ->fetch_all(MYSQLI_NUM);
 // var_dump_pre($rowsNum);
 // mysql_data_seek($sql,0);
-var_dump_pre($rowsJoin);
+// var_dump_pre($rowsJoin);
 
 
 // var_dump_pre($rowsJoin); 
@@ -120,6 +120,7 @@ var_dump_pre($rowsJoin);
             <!-- ================ DETAILS ================= -->
             <div class="details">
             <?php foreach ($rowsJoin as $product) : ?>
+            <?php $location = explode(',',($product['location']));?>
                 <?php $pictureArr = explode(',',$product['picture']); ?>
                         <div class="products-items my-2">
                             <div class="titlecard">
@@ -137,7 +138,25 @@ var_dump_pre($rowsJoin);
                                     </div>
                                     <div class="guide-location">
                                         <p>有無導遊：<?php if($product['guide']==1){echo '有';}else{echo '無';}?></p>
-                                        <p>地點：<?=$product['location']?></p>
+                                        <p>地點：<?php 
+                                            for($i=0;$i<count($location);$i++){
+                                                switch ($location[$i]){
+                                                case 'northern':
+                                                echo '北部';
+                                                break;
+                                                case 'central' :
+                                                echo '中部';
+                                                break;
+                                                case 'southern':
+                                                echo '南部';
+                                                break;
+                                                case 'eastern':
+                                                echo '東部';
+                                                break;
+                                                case  'oversea';
+                                                echo '海外';
+                                            }}?>
+                                        </p>
                                         <p>平均評價：5</p>
                                     </div>
                                     <div class="des">
@@ -183,15 +202,30 @@ var_dump_pre($rowsJoin);
                                                     for($i=0;$i<count($customTag);$i++) {
                                                         echo "<div class='tags'>".$customTag[$i]."</div>";
                                                     }
-                                                }?>
-                                                  
+                                                }?>       
                                                 <?php endforeach; ?>
                                     </div>    
                                 </div>
                                 <div class="users-data">
-                                    <div class="user-card"></div>
+                                    <div class="users-items">
+                                        <div class="users-titlecard">
+                                            <div class="users-control">
+                                                <h4>顧客名字</h4>
+                                            </div>
+                                            <img src="" alt="顧客照片">
+                                        </div>
+                                        <div class="users-comment">
+                                            <h5 class="comment">評語：很好玩</h5>
+                                            <h5 class="comment-star">評價：5</h5>
+                                        </div>
+
+                                        <div class="user-card-banner"></div>
+                                    </div>
                                 </div>
-                                <div class="crudBtns"></div>
+                                <div class="crudBtns">
+                                    <button class="Ubtn">修改</button>
+                                    <button class="Dbtn">下架</button>
+                                </div>
                             </div>
                             <!-- <a class="btn btn-danger" href="javascript:void(0)">刪除</a> -->
                         </div>

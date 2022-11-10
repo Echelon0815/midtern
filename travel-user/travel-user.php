@@ -1,8 +1,8 @@
 <?php
-require_once("../db-connect2.php");
+require_once("./db-connect.php");
 
-$sqlTrip= "SELECT * FROM trip_event";
-$result = $conn -> query($sqlTrip);
+$sqlTrip = "SELECT * FROM trip_event";
+$result = $conn->query($sqlTrip);
 $rows = $result->fetch_all(MYSQLI_ASSOC);
 // var_dump($rows);
 ?>
@@ -162,7 +162,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                         <div class="numbers">80</div>
                         <div class="cardName">平均評論等級</div>
                     </div> -->
-                    
+
                     <div class="iconBx">
                         <ion-icon name="chatbubbles-outline"></ion-icon>
                     </div>
@@ -206,10 +206,12 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                         <h2>公司資料</h2>
                     </div>
                     <div class="data-wrapper w-100">
-                        <div class="topic">帳號：</div><div class="content">Axis0001</div>
+                        <div class="topic">帳號：</div>
+                        <div class="content">Axis0001</div>
                     </div>
                     <div class="data-wrapper w-100">
-                        <div class="topic">密碼：</div><div class="content">Axispassword</div>
+                        <div class="topic">密碼：</div>
+                        <div class="content">Axispassword</div>
                     </div>
                 </div>
 
@@ -218,20 +220,20 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                     <div class="cardHeader">
                         <h2>行程規劃</h2>
                     </div>
-                    <?php foreach ($rows as $product): ?>
+                    <?php foreach ($rows as $product) : ?>
                         <div class="products-items my-2">
                             <div class="titlecard">
                                 <div class="products-control">
-                                    <h4><?=$product["trip_name"]?></h4>
+                                    <h4><?= $product["trip_name"] ?></h4>
                                 </div>
-                                <img src="<?=$product["picture"]?>" alt="">
+                                <img src="<?= $product["picture"] ?>" alt="">
                             </div>
                             <div class="products-summary">
                                 <h5 class="start-date">上架日：
-                                    <span><?=$product["start_date"]?></span>
+                                    <span><?= $product["start_date"] ?></span>
                                 </h5>
                                 <h5 class="price">價格：
-                                    <span>NT$<?=$product["price"]?></span>
+                                    <span>NT$<?= $product["price"] ?></span>
                                 </h5>
                                 <h5 class="comment-star">評價：
                                     <span>5</span>

@@ -1,5 +1,5 @@
 <?php
-require_once("../db-connect2.php");
+require_once("./db-connect.php");
 
 if (isset($_GET["search"])) {
     $search = $_GET["search"];

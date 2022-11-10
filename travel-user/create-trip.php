@@ -50,7 +50,7 @@
                 </li>
 
                 <li>
-                    <a href="admin.php">
+                    <a href="travel-user.php">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -63,7 +63,7 @@
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
-                        <span class="title">會員</span>
+                        <span class="title">上架</span>
                     </a>
                 </li>
 
@@ -72,7 +72,7 @@
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
-                        <span class="title">HOTEL</span>
+                        <span class="title">產品一覽</span>
                     </a>
                 </li>
 
@@ -81,25 +81,7 @@
                         <span class="icon">
                             <ion-icon name="help-outline"></ion-icon>
                         </span>
-                        <span class="title">TRAVEL</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="settings-outline"></ion-icon>
-                        </span>
-                        <span class="title">優惠卷</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="lock-closed-outline"></ion-icon>
-                        </span>
-                        <span class="title">Password</span>
+                        <span class="title">公司資料修改</span>
                     </a>
                 </li>
 
@@ -179,7 +161,7 @@
 
                         <fieldset class="picture">
                             <legend>宣傳照上傳<span>*</span></legend>
-                            <input type="file" name="picture" id="picture" required>
+                            <input type="file" name="picture[]" id="picture" multiple required>
                         </fieldset>
                         <input type="valid" name="valid" id="valid" value="1" style="display:none;">
                 </div>
@@ -222,15 +204,15 @@
                             <input class="groupTag" type="checkbox" name="indoor_outdoor[]" id="indoor" value="0">
                             <label for="outdoor">室外</label>
                             <input class="groupTag" type="checkbox" name="indoor_outdoor[]" id="outdoor" value="1">
-                            <label for="both">遊樂園、特殊節慶</label>
+                            <label for="both">都有</label>
                             <input class="groupTag" type="checkbox" name="indoor_outdoor[]" id="both" value="2">
                         </div>
                     </fieldset>
                     <fieldset class="custom-tag">
                         <legend>自定義屬性<small class="h6">※選填</small></legend>
-                        <p>顯示在介紹文中、可用於關鍵字搜尋<small>※最多五個，以半形comma(,)隔開</small></p>
+                        <p>顯示在介紹文中、可用於關鍵字搜尋<small>※最多五個，以半形斜線(/)隔開</small></p>
                         <label for="custom_tag">請輸入</label>
-                        <input type="text" name="custom_tag[]" id="custom_tag" placeholder="A,B,C,D,E">
+                        <input type="text" name="custom_tag" id="custom_tag" placeholder="A/B/C/D/E">
                     </fieldset>
                     <button type="submit">送出</button>
                 </div>

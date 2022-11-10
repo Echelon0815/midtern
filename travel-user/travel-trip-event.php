@@ -1,14 +1,13 @@
 <?php
+//需要session account name 作為上傳者
 require_once("./db-connect.php");
 require_once('var_dump_pre.php');
 
 $sqlTrip = "SELECT * FROM trip_event";
 $result = $conn->query($sqlTrip);
 $rows = $result->fetch_all(MYSQLI_ASSOC);
-// var_dump_pre($pictureArr);
-// var_dump_pre($banner);
-// var_dump($rows);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,18 +15,11 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RWD後台</title>
+    <title>產品一覽</title>
     <!-- ======= Styles ====== -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <link rel="stylesheet" href="./assets/css/style2.css">
+    <link rel="stylesheet" href="assets/css/trip-event.css">
     <style>
-        .search label ion-icon {
-            position: absolute;
-            top: 11px;
-            left: 10px;
-            font-size: 1.2rem;
-        }
-
         .main.active {
             width: calc(100% - 110px);
             left: 110px;
@@ -35,27 +27,6 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
 
         .navigation.active {
             width: 110px;
-        }
-
-        .details {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        @media (max-width: 768px) {
-            .details {
-                grid-template-columns: 1fr;
-            }
-        }
-
-
-        .details .recentOrders table tbody tr a {
-            text-decoration: none;
-        }
-
-        .details .recentOrders table tbody tr:hover a {
-            background: var(--blue);
-            color: var(--white);
-
         }
     </style>
 </head>
@@ -75,7 +46,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                 </li>
 
                 <li>
-                    <a href="admin.php">
+                    <a href="travel-user.php">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -84,7 +55,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                 </li>
 
                 <li>
-                    <a href="create-trip.php">
+                    <a href="#">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -128,103 +99,14 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                     <ion-icon name="menu-outline"></ion-icon>
                 </div>
 
-                <!-- <div class="search">
-                    <form action="admin.php" method="get">
-                        <label>
-                            <input type="text" placeholder="Search here" class="form-control" name="search">
-                            <ion-icon name="search-outline"></ion-icon>
-                            <button type="submit" class="btn btn-info">搜尋</button>
-                        </label>
-                    </form>
-                </div>   -->
                 <div class="user">
                     <img src="assets/imgs/customer01.jpg" alt="">
                 </div>
             </div>
-
-            <!-- ======================= Cards ================== -->
-            <div class="cardBox">
-                <div class="card">
-                    <div>
-                        <div class="numbers">12</div>
-                        <div class="cardName">本周團數</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="accessibility-outline"></ion-icon>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="omote">
-                        <div class="numbers">80</div>
-                        <div class="cardName">客人評論數</div>
-                    </div>
-
-                    <!-- <div class="ura">
-                        <div class="numbers">80</div>
-                        <div class="cardName">平均評論等級</div>
-                    </div> -->
-
-                    <div class="iconBx">
-                        <ion-icon name="chatbubbles-outline"></ion-icon>
-                    </div>
-
-                </div>
-
-                <div class="card">
-                    <div class="omote">
-                        <div class="numbers">284</div>
-                        <div class="cardName">線上成交量</div>
-                    </div>
-                    <!-- <div class="ura">
-                        <div class="numbers">284</div>
-                        <div class="cardName">上個月成交量</div>
-                    </div> -->
-                    <div class="iconBx">
-                        <ion-icon name="cart-outline"></ion-icon>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="omote">
-                        <div class="numbers">$7,842</div>
-                        <div class="cardName">成交額</div>
-                    </div>
-                    <!-- <div class="ura">
-                        <div class="numbers">$7,842</div>
-                        <div class="cardName">稅後淨利</div>
-                    </div> -->
-
-                    <div class="iconBx">
-                        <ion-icon name="cash-outline"></ion-icon>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ================ Order Details List ================= -->
+            <!-- ================ Form ================= -->
             <div class="details">
-                <div class="companyDetail">
-                    <div class="cardHeader">
-                        <h2>公司資料</h2>
-                    </div>
-                    <div class="data-wrapper w-100">
-                        <div class="topic">帳號：</div>
-                        <div class="content">Axis0001</div>
-                    </div>
-                    <div class="data-wrapper w-100">
-                        <div class="topic">密碼：</div>
-                        <div class="content">Axispassword</div>
-                    </div>
-                </div>
-
-                <!-- ================= New Customers ================ -->
-                <div class="products">
-                    <div class="cardHeader">
-                        <h2>行程規劃</h2>
-                    </div>
-                    <?php foreach ($rows as $product) : ?>
-                        <?php $pictureArr = explode(',',$product['picture']); ?>
+            <?php foreach ($rows as $product) : ?>
+                <?php $pictureArr = explode(',',$product['picture']); ?>
                         <div class="products-items my-2">
                             <div class="titlecard">
                                 <div class="products-control">
@@ -247,15 +129,13 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                             <!-- <a class="btn btn-danger" href="javascript:void(0)">刪除</a> -->
                         </div>
                     <?php endforeach; ?>
-                </div>
+
             </div>
         </div>
     </div>
 
     <!-- =========== Scripts =========  -->
     <script src="./assets/js/main2.js"></script>
-
-
     <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

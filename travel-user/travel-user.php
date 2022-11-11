@@ -2,7 +2,7 @@
 require_once("./db-connect.php");
 require_once('var_dump_pre.php');
 
-$sqlTrip = "SELECT * FROM trip_event";
+$sqlTrip = "SELECT * FROM trip_event WHERE valid=1";
 $result = $conn->query($sqlTrip);
 $rows = $result->fetch_all(MYSQLI_ASSOC);
 // var_dump_pre($pictureArr);
@@ -19,7 +19,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
     <title>RWD後台</title>
     <!-- ======= Styles ====== -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <link rel="stylesheet" href="./assets/css/style2.css">
+    <link rel="stylesheet" href="./assets/css/travel-user.css">
     <style>
         .search label ion-icon {
             position: absolute;
@@ -75,7 +75,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                 </li>
 
                 <li>
-                    <a href="admin.php">
+                    <a href="#">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
                         </span>
@@ -84,7 +84,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                 </li>
 
                 <li>
-                    <a href="create-trip.php">
+                    <a href="trip-create.php">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -93,7 +93,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="trip-list.php">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>
@@ -242,7 +242,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                                 <h5 class="comment-star">評價：
                                     <span>5</span>
                                 </h5>
-                                <a class="bg-danger" href="javascript:void(0)">刪除</a>
+                                <a class="bg-danger" href="do-delete.php?product=<?=$product["trip_name"]?>">刪除</a>
                             </div>
                             <!-- <a class="btn btn-danger" href="javascript:void(0)">刪除</a> -->
                         </div>
@@ -253,7 +253,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
     </div>
 
     <!-- =========== Scripts =========  -->
-    <script src="./assets/js/main2.js"></script>
+    <script src="./assets/js/travel-user.js"></script>
 
 
     <!-- ====== ionicons ======= -->

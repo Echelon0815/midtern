@@ -64,7 +64,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="travel-trip-event-grid-test.php">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>

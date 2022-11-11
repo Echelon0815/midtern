@@ -7,7 +7,7 @@ require_once('var_dump_pre.php');
 // $result = $conn->query($sqlTrip);
 // $rows = $result->fetch_all(MYSQLI_ASSOC);
 
-$sqlJoin = "SELECT TE.*,TSL.* FROM trip_event AS TE JOIN trip_service_list AS TSL ON TE.trip_name = TSL.trip";
+$sqlJoin = "SELECT TE.*,TSL.* FROM trip_event AS TE JOIN trip_service_list AS TSL ON TE.trip_name = TSL.trip AND TE.valid = 1";
 $resultJoin = $conn -> query($sqlJoin);
 
 // $rowsJoin = $resultJoin->fetch_all(MYSQLI_ASSOC);
@@ -32,7 +32,7 @@ $rowsJoin = $resultJoin->fetch_all(MYSQLI_ASSOC);
     <title>產品一覽</title>
     <!-- ======= Styles ====== -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/trip-event.css">
+    <link rel="stylesheet" href="assets/css/trip-list.css">
     <style>
         .main.active {
             width: calc(100% - 110px);
@@ -69,7 +69,7 @@ $rowsJoin = $resultJoin->fetch_all(MYSQLI_ASSOC);
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="trip-create.php">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -120,8 +120,9 @@ $rowsJoin = $resultJoin->fetch_all(MYSQLI_ASSOC);
             <!-- ================ DETAILS ================= -->
             <div class="details">
             <?php foreach ($rowsJoin as $product) : ?>
+            <?php var_dump_pre($product["trip_name"]);?>
+            <?php $pictureArr = explode(',',$product['picture']); ?>
             <?php $location = explode(',',($product['location']));?>
-                <?php $pictureArr = explode(',',$product['picture']); ?>
                         <div class="products-items my-2">
                             <div class="titlecard">
                                 <div class="products-control">
@@ -223,8 +224,8 @@ $rowsJoin = $resultJoin->fetch_all(MYSQLI_ASSOC);
                                     </div>
                                 </div>
                                 <div class="crudBtns">
-                                    <button class="Ubtn">修改</button>
-                                    <button class="Dbtn">下架</button>
+                                    <a class="Ubtn" href="trip-update.php?product=<?=$product["trip_name"]?>">修改</a>
+                                    <a class="Dbtn" href="do-delete.php?product=<?=$product["trip_name"]?>">下架</a>
                                 </div>
                             </div>
                             <!-- <a class="btn btn-danger" href="javascript:void(0)">刪除</a> -->
@@ -236,7 +237,7 @@ $rowsJoin = $resultJoin->fetch_all(MYSQLI_ASSOC);
     </div>
 
     <!-- =========== Scripts =========  -->
-    <script src="./assets/js/main2.js"></script>
+    <script src="./assets/js/travel-user.js"></script>
     <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

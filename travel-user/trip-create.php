@@ -12,7 +12,7 @@
     <title>Responsive Admin Dashboard | Korsat X Parmaga</title>
     <!-- ======= Styles ====== -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/create-trip.css">
+    <link rel="stylesheet" href="assets/css/trip-create.css">
     <style>
         .main.active {
             width: calc(100% - 110px);
@@ -59,7 +59,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="trip-create">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -68,7 +68,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="trip-list.php">
                         <span class="icon">
                             <ion-icon name="chatbubble-outline"></ion-icon>
                         </span>

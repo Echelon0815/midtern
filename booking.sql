@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2022-11-08 20:29:44
+-- 產生時間： 2022-11-11 15:28:37
 -- 伺服器版本： 10.4.25-MariaDB
 -- PHP 版本： 7.4.30
 
@@ -49,7 +49,7 @@ CREATE TABLE `hotel_account` (
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '飯店密碼',
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '負責人',
   `company_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '公司名',
-  `company_phone` int(20) NOT NULL COMMENT '公司電話',
+  `company_phone` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '公司電話',
   `stars` int(20) NOT NULL COMMENT '星級',
   `company_banner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '公司橫幅圖',
   `area` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '地區',
@@ -157,7 +157,7 @@ CREATE TABLE `travel_account` (
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '飯店密碼',
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '負責人',
   `company_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '公司名',
-  `company_phone` int(20) NOT NULL COMMENT '公司電話',
+  `company_phone` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '公司電話',
   `company_banner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '公司橫幅圖',
   `area` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '地區',
   `created_at` datetime NOT NULL COMMENT '建立帳號日期',
@@ -174,7 +174,7 @@ CREATE TABLE `travel_account` (
 --
 
 INSERT INTO `travel_account` (`id`, `account`, `password`, `name`, `company_name`, `company_phone`, `company_banner`, `area`, `created_at`, `bank_account`, `start_date`, `email`, `website`, `introduction`, `valid`) VALUES
-(1, 'Axis0093', '123', 'Char', '紅色三倍速旅行社', 933333384, 'http://www.gundam-cca.net/img_top/mv.jpg', '新竹縣', '2022-11-04 09:43:13', 0, '2022-11-04 09:43:13', 'char@gmail.com', 'www.google.com', '提供登陸小行星的服務', 1);
+(1, 'Axis0093', '123', 'Char', '紅色三倍速旅行社', '933333384', 'http://www.gundam-cca.net/img_top/mv.jpg', '新竹縣', '2022-11-04 09:43:13', 0, '2022-11-04 09:43:13', 'char@gmail.com', 'www.google.com', '提供登陸小行星的服務', 1);
 
 -- --------------------------------------------------------
 
@@ -213,6 +213,14 @@ CREATE TABLE `trip_event` (
   `valid` int(20) NOT NULL COMMENT '軟刪除'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- 傾印資料表的資料 `trip_event`
+--
+
+INSERT INTO `trip_event` (`id`, `owner`, `trip_name`, `price`, `start_date`, `end_date`, `description`, `guide`, `location`, `picture`, `created_at`, `valid`) VALUES
+(1, 'Axis0093', '舊金山賞鯨', 55555, '2022-11-12', '2022-11-26', '測試二', 0, 'northern,central,southern,eastern,oversea', 'dohpins_hotel.jpg,dolphins.webp', '2022-11-10 11:31:06', 0),
+(2, 'Axis0093', 'TEST', 1000, '2022-11-05', '2022-11-26', '1234', 1, 'central,southern,eastern,oversea', 'frost.jpg', '2022-11-10 12:36:14', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -231,11 +239,19 @@ CREATE TABLE `trip_service_list` (
   `amusement` int(20) NOT NULL COMMENT '遊樂園、童玩節...',
   `meal` int(20) NOT NULL COMMENT '包餐',
   `no_shopping` int(20) NOT NULL COMMENT '有無購物行程',
-  `family-friendly` int(20) NOT NULL COMMENT '家庭活動',
+  `family_friendly` int(20) NOT NULL COMMENT '家庭活動',
   `pet` int(20) NOT NULL COMMENT '能帶寵物嗎',
-  `indoor_outdoor` int(20) NOT NULL COMMENT '0:室內\r\n1:室外\r\n2:both',
+  `indoor_outdoor` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '0:室內\r\n1:室外\r\n2:both',
   `custom_tag` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '以 comma (,)\r\n分隔，自定義的標籤'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- 傾印資料表的資料 `trip_service_list`
+--
+
+INSERT INTO `trip_service_list` (`id`, `trip`, `mountain`, `in_water`, `snow`, `natural_attraction`, `culture_history`, `workshop`, `amusement`, `meal`, `no_shopping`, `family_friendly`, `pet`, `indoor_outdoor`, `custom_tag`) VALUES
+(1, '舊金山賞鯨', 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, '1,2', '123/123'),
+(2, 'TEST', 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, '0', '123/123');
 
 -- --------------------------------------------------------
 
@@ -450,13 +466,13 @@ ALTER TABLE `trip_comment`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `trip_event`
 --
 ALTER TABLE `trip_event`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `trip_service_list`
 --
 ALTER TABLE `trip_service_list`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `users`

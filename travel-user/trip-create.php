@@ -64,7 +64,7 @@ $account = $_SESSION['account'];
                 </li>
 
                 <li>
-                    <a href="trip-create">
+                    <a href="trip-create.php">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -81,7 +81,7 @@ $account = $_SESSION['account'];
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="../doSignout.php">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>

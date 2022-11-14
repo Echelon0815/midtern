@@ -70,4 +70,4 @@ if ($conn->query($sqlTrip) === TRUE) {
     echo "更新資料錯誤: " . $conn->error;
 }
 
-// header("location:travel-user.php#account");
+header("location:travel-user.php#account");

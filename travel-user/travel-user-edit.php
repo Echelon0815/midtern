@@ -119,7 +119,7 @@ $trips = $result->fetch_all(MYSQLI_ASSOC);
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="../doSignout.php">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>

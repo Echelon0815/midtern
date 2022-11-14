@@ -85,4 +85,4 @@ $stmt->execute();
 
 $conn->close();
 
-header("location:trip-create.php");
+header("location:trip-list.php");

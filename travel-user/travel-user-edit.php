@@ -12,10 +12,7 @@ $result = $conn->query($sqlUserAccount);
 //設置userCount 看看帳號存不存在
 $userCount = $result->num_rows;
 $rows = $result->fetch_assoc();
-//設定按下刪除鍵的網址
-$_SESSION['del_location'] = $_SERVER['PHP_SELF'];
-// var_dump_pre($_SESSION['location']);
-
+ 
 
 //將變數$account的值設為 account實際名稱
 $_SESSION['account'] = $rows['account'];
@@ -27,6 +24,7 @@ $account = $_SESSION['account'];
 $sqlTrip = "SELECT * FROM trip_event WHERE valid=1 AND owner='$account'";
 $result = $conn->query($sqlTrip);
 $trips = $result->fetch_all(MYSQLI_ASSOC);
+// var_dump_pre($trips);
 
 ?>
 <!DOCTYPE html>
@@ -212,87 +210,109 @@ $trips = $result->fetch_all(MYSQLI_ASSOC);
                 </div>
             </div>
 
-            <!-- ================ Order Details List ================= -->
+            <!-- ================ Company Detail List ================= -->
             <div class="details">
                 <div class="companyDetail">
-                    <h2 id="account">帳號資料</h2>
                     <?php if ($userCount == 0) : ?>
                         使用者不存在
                     <?php else : ?>
-                        <table class="table table-bordered ">
-                            <tbody>
-                                <tr>
-                                    <td colspan="2">
-                                        <img class="company-banner" src="./assets/imgs/<?= $rows["company_banner"] ?>" alt="<?= $rows["company_banner"] ?>">
-                                    </td>
-                                </tr>
-                                <tr>
+                        <h2 id="account">帳號資料修改</h2>
+                        <form action="travel-user-doEdit.php" method="post" enctype="multipart/form-data">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <img class="company-banner" src="./assets/imgs/<?= $rows["company_banner"] ?>" alt="<?= $rows["company_banner"] ?>">
+                                        </td>
+                                        <!--插入id-->
+                                        <input type="hidden" name="id" value="<?= $rows["id"] ?>">
+                                    </tr>
+                                    <tr>
+                                        <td>上傳圖片</td>
+                                        <td>
+                                            <input type="file" class="form-control" name="company_banner">
+                                        </td>
+                                    </tr>
                                     <td>會員帳號</td>
-                                    <td><?= $rows["account"] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>會員密碼</td>
-                                    <td><?= $rows["password"] ?></td>
-                                </tr>
-
-
-                                <tr>
-                                    <td>負責人姓名</td>
-                                    <td><?= $rows["name"] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>公司名稱</td>
-                                    <td><?= $rows["company_name"] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>開業日期</td>
-                                    <td><?= $rows["start_date"] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>地區</td>
                                     <td>
-                                        <?php
-                                        if ($rows["area"] == 0) {
-                                            echo "北";
-                                        }
-                                        if ($rows["area"] == 1) {
-                                            echo "中";
-                                        }
-                                        if ($rows["area"] == 2) {
-                                            echo "南";
-                                        }
-                                        ?>
+                                        <input type="text" name="account" value="<?= $rows["account"] ?>">
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td>公司電話</td>
-                                    <td><?= $rows["company_phone"] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>公司信箱</td>
-                                    <td><?= $rows["email"] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>銀行帳戶</td>
-                                    <td><?= $rows["bank_account"] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>官網</td>
-                                    <td><?= $rows["website"] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>公司簡介</td>
-                                    <td><?= $rows["introduction"] ?></td>
-                                </tr>
-                                <tr>
-                                    <td>加入會員時間</td>
-                                    <td><?= $rows["created_at"] ?></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="py-2">
-                            <a class="btn btn-info" href="travel-user-edit.php#account">編輯使用者</a>
-                        </div>
+                                    </tr>
+                                    <tr>
+                                        <td>會員密碼</td>
+                                        <td>
+                                            <input type="text" name="password" value="<?= $rows["password"] ?>">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>負責人姓名</td>
+                                        <td>
+                                            <input type="text" class="form-control" value="<?= $rows["name"] ?>" name="name">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>公司名稱</td>
+                                        <td>
+                                            <input type="text" class="form-control" value="<?= $rows["company_name"] ?>" name="company_name">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>開業日期</td>
+                                        <td>
+                                            <input type="text" disabled class="form-control" value="<?= $rows["start_date"] ?>" name="start_date">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>地區</td>
+                                        <td>
+                                            <select name="area" id="area" class="form-select">
+                                                <option value="0" <?php if ($rows["area"] == 0) : echo "selected";
+                                                                    endif; ?>>北</option>
+                                                <option value="1" <?php if ($rows["area"] == 1) : echo "selected";
+                                                                    endif; ?>>中</option>
+                                                <option value="2" <?php if ($rows["area"] == 2) : echo "selected";
+                                                                    endif; ?>>南</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>公司電話</td>
+                                        <td>
+                                            <input type="text" class="form-control" value="<?= $rows["company_phone"] ?>" name="company_phone">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>公司信箱</td>
+                                        <td>
+                                            <input type="text" class="form-control" value="<?= $rows["email"] ?>" name="email">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>銀行帳戶</td>
+                                        <td>
+                                            <input type="text" class="form-control" value="<?= $rows["bank_account"] ?>" name="bank_account">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>官網</td>
+                                        <td>
+                                            <input type="text" class="form-control" value="<?= $rows["website"] ?>" name="website">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>公司簡介</td>
+                                        <td>
+                                            <input type="text" class="form-control" value="<?= $rows["introduction"] ?>" name="introduction">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="py-2 d-inline">
+                                <a class="btn btn-info" href="travel-user.php#account">回使用者</a>
+                            </div>
+                            <button class="btn btn-info" type="submit">送出</button>
+                        </form>
                     <?php endif; ?>
                 </div>
 

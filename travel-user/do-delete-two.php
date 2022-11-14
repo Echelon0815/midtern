@@ -13,7 +13,7 @@ $location = $_SESSION['del_location'];
 
 $productName = $_GET["product"];
 
-$sql = "UPDATE trip_event SET valid = 0 WHERE trip_name = '$productName'";
+$sql = "UPDATE trip_event SET valid = 2 WHERE trip_name = '$productName'";
 
 if ($conn->query($sql) === TRUE) {
     echo "刪除成功";
